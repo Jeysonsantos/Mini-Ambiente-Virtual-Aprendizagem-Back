@@ -25,10 +25,13 @@ import lombok.Setter;
 public class DisciplinaAluno {
     private static final String TABLE_NAME = "DisciplinaAluno";
 
+    public interface CreateDisciplinaAluno{}
+    public interface UpdateDisciplinaAluno{}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_matricula", unique = true, nullable = false, updatable = false)
-    private Long id_matricula;
+    @Column(name = "id_disciplina_aluno", unique = true, nullable = false, updatable = false)
+    private Long id_disciplina_aluno;
 
     @JoinColumn(name = "id_aluno", nullable = false, updatable = false)
     @NotNull
@@ -40,8 +43,10 @@ public class DisciplinaAluno {
     @ManyToOne
     private Disciplina id_disciplina;
 
-    @Column(name = "nota", nullable = false)
+    @Column(name = "nota", nullable = false, columnDefinition = "float default 0.0")
+    @NotNull(groups = {CreateDisciplinaAluno.class, UpdateDisciplinaAluno.class})
     private float nota;
+
 
     
 }

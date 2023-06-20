@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,6 +28,11 @@ public class Frequencia {
 
     public static final String TABLE_NAME = "Frequencia";
 
+    public interface CreateFrequencia {
+    }
+    public interface UpdateFrequencia {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_frequencia", unique = true, nullable = false, updatable = false)
@@ -34,9 +40,10 @@ public class Frequencia {
 
     @ManyToOne
     @JoinColumn(name = "id_disciplina", nullable = false, updatable = false)
-    private Disciplina id_materia;
+    private Disciplina id_disciplina;
 
-    @Column(name = "data", nullable = false)
-    private LocalDate data;
+    @Column(name = "dia", nullable = false)
+    @NotNull(groups = {CreateFrequencia.class, UpdateFrequencia.class})
+    private LocalDate dia;
 
 }

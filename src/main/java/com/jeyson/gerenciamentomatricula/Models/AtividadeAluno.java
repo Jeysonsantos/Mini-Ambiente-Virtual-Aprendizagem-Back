@@ -27,8 +27,8 @@ public class AtividadeAluno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false, updatable = false)
-    private Long id;
+    @Column(name = "id_atividade_aluno", unique = true, nullable = false, updatable = false)
+    private Long id_atividade_aluno;
     
     @JoinColumn(name = "id_aluno", nullable = false, updatable = false)
     @ManyToOne

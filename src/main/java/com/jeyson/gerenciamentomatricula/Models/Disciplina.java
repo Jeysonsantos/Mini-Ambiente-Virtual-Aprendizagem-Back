@@ -26,6 +26,10 @@ import lombok.Setter;
 public class Disciplina {
     public static final String TABLE_NAME = "Disciplinas";
 
+    public interface CreateDisciplina{
+    }
+    public interface UpdateDisciplina{
+    }
     @Id
     @Column(name = "id_disciplina", unique = true, nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,22 +40,22 @@ public class Disciplina {
     private Professor id_professor;
 
     @Column(name = "nome", nullable = false, length = 255)
-    @NotNull
-    @NotEmpty
+    @NotNull(groups = { CreateDisciplina.class})
+    @NotEmpty(groups = { CreateDisciplina.class})
     private String nome;
 
-    @Column(name = "codigo", nullable = false, length = 7)
-    @NotNull
-    @NotEmpty
+    @Column(name = "codigo", nullable = false, length = 7,unique = true)
+    @NotNull(groups = { CreateDisciplina.class})
+    @NotEmpty(groups = { CreateDisciplina.class})
     private String codigo;
 
     @Column(name = "carga_horaria", nullable = false)
-    @NotNull
-    @NotEmpty
+    @NotNull(groups = { CreateDisciplina.class})
     private int carga_horaria;
 
     @Column(name = "ementa")
+    @NotNull(groups = { CreateDisciplina.class, UpdateDisciplina.class})
+    @NotEmpty(groups = { CreateDisciplina.class, UpdateDisciplina.class})
     private String ementa;
-    
     
 }

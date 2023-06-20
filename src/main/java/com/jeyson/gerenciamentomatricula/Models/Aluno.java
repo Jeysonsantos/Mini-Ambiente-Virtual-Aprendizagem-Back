@@ -59,7 +59,7 @@ public class Aluno {
     @Size(min = 8, max = 8)
     private String matricula;
 
-    @Column(name = "telefone", nullable = false, length = 11)
+    @Column(name = "telefone", nullable = false, length = 11, unique = true)
     @NotNull(groups = { CreateAluno.class, UpdateAluno.class })
     @NotEmpty(groups = { CreateAluno.class, UpdateAluno.class })
     @Size(min = 11, max = 11)
