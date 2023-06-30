@@ -13,14 +13,18 @@ import com.jeyson.gerenciamentomatricula.Repositories.UsuarioRepository;
 @Service
 public class AuthService {
     
-    @Autowired
     private AlunoRepository alunoRepository;
     
-    @Autowired
     private ProfessorRepository professorRepository;
     
-    @Autowired
     private UsuarioRepository usuarioRepository;
+
+    public AuthService(AlunoRepository alunoRepository, ProfessorRepository professorRepository,
+            UsuarioRepository usuarioRepository) {
+        this.alunoRepository = alunoRepository;
+        this.professorRepository = professorRepository;
+        this.usuarioRepository = usuarioRepository;
+    }
     
     @Transactional
     public Long obterIdUsuarioPorCpf(String cpf) {

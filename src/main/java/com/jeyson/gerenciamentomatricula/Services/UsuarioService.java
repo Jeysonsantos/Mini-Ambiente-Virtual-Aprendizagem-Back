@@ -1,5 +1,7 @@
 package com.jeyson.gerenciamentomatricula.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,10 @@ public class UsuarioService {
     public Usuario updateUsuario(Usuario usuario) {
         usuario = this.usuarioRepository.save(usuario);
         return usuario;
+    }
+
+    public List<Usuario> getAllUsuarios() {
+        return this.usuarioRepository.findAll();
     }
     
 }
