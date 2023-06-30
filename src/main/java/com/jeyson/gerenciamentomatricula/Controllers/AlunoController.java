@@ -27,19 +27,11 @@ public class AlunoController {
     @Autowired
     private AlunoService alunoService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Aluno> getAlunoById(@PathVariable(value = "id") Long alunoId) {
-        Aluno aluno = alunoService.getAlunoById(alunoId);
-        return ResponseEntity.ok().body(aluno);
-    }
-
     @PostMapping("/create")
     @Validated(CreateAluno.class)
     public ResponseEntity<Aluno> createAluno(@Valid @RequestBody Aluno aluno) {
         Aluno alunoCriado = alunoService.createAluno(aluno);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(alunoCriado.getId_aluno()).toUri();
         return ResponseEntity.created(uri).body(alunoCriado);
-}
-
-
+    }
 }
