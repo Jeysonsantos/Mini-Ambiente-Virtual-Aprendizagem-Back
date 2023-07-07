@@ -32,9 +32,15 @@ public class ProfessorService {
         usuario.setSenha(senha);
         usuario.setId_aluno_professor(professor.getId_professor());
         usuario.setTipo_usuario("professor");
+        usuario.setNome(professor.getNome());
 
         usuarioService.createUsuario(usuario);
 
         return professor;
+    }
+
+    @Transactional
+    public String getNomeProfessor(Long id) {
+        return professorRepository.findById(id).get().getNome();
     }
 }

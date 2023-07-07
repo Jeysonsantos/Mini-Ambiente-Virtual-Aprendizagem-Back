@@ -38,7 +38,7 @@ public class Usuario {
     private Long id_usuario;
 
     @Column(name = "cpf", nullable = false, length = 11, unique = true)
-    @Size(min = 11, max = 11)
+    @Size(min = 5, max = 11)
     private String cpf;
 
     @Column(name = "senha", nullable = false, length = 255)
@@ -47,6 +47,10 @@ public class Usuario {
 
     @Column(name = "id_aluno/professor", nullable = false, updatable = false)
     private Long id_aluno_professor;
+
+    @Column(name = "nome", nullable = false, length = 255)
+    @Size(min = 3, max = 255)
+    private String nome;
 
     @NotNull(groups = { CreateUsuario.class, UpdateUsuario.class })
     @NotEmpty(groups = { CreateUsuario.class, UpdateUsuario.class })

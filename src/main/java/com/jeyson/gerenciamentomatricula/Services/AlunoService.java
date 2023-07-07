@@ -32,10 +32,16 @@ public class AlunoService {
         Usuario.setSenha(senha);
         Usuario.setId_aluno_professor(aluno.getId_aluno());
         Usuario.setTipo_usuario("aluno");
+        Usuario.setNome(aluno.getNome());
 
         usuarioService.createUsuario(Usuario);
 
         return aluno;
+    }
+
+    @Transactional
+    public String getNomeAluno(Long id) {
+        return alunoRepository.findById(id).get().getNome();
     }
 
 }

@@ -35,6 +35,7 @@ public class LoginController {
             if (u.getCpf().equals(usuario) && u.getSenha().equals(senha)) {
                 autenticarUsuario.setIdUsuario(u.getId_aluno_professor());
                 autenticarUsuario.setTipoUsuario(u.getTipo_usuario());
+                autenticarUsuario.setNome(u.getNome());
                 return ResponseEntity.ok(autenticarUsuario);
             }
         }

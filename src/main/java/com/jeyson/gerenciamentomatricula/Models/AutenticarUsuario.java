@@ -18,5 +18,7 @@ public class AutenticarUsuario {
 
     private String tipoUsuario;
 
+    private String nome;
+
 
 }
