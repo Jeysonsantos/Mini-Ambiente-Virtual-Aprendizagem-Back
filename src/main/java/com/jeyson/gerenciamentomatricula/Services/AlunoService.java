@@ -1,5 +1,7 @@
 package com.jeyson.gerenciamentomatricula.Services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +44,10 @@ public class AlunoService {
     @Transactional
     public String getNomeAluno(Long id) {
         return alunoRepository.findById(id).get().getNome();
+    }
+
+    public List<Aluno> getAllAlunos() {
+        return this.alunoRepository.findAll();
     }
 
 }
