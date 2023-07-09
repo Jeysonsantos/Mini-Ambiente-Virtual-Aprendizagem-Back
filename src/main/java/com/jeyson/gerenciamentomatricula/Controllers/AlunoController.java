@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import com.jeyson.gerenciamentomatricula.Services.AlunoService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/admin/aluno")
 @Validated
 @CrossOrigin(origins = "http://localhost:4200")
 public class AlunoController {
@@ -40,4 +41,34 @@ public class AlunoController {
     public ResponseEntity<Iterable<Aluno>> listAlunos() {
         return ResponseEntity.ok().body(alunoService.getAllAlunos());
     }
+    @GetMapping("/checkMatriculaExists/{matricula}")
+    public ResponseEntity<?> checkMatriculaExists(@PathVariable String matricula) {
+        boolean exists = alunoService.checkMatriculaExists(matricula);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/checkCpfExists/{cpf}")
+    public ResponseEntity<?> checkCpfExists(@PathVariable String cpf) {
+        boolean exists = alunoService.checkCpfExists(cpf);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/checkRgExists/{rg}")
+    public ResponseEntity<?> checkRgExists(@PathVariable String rg) {
+        boolean exists = alunoService.checkRgExists(rg);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/checkTelefoneExists/{telefone}")
+    public ResponseEntity<?> checkTelefoneExists(@PathVariable String telefone) {
+        boolean exists = alunoService.checkTelefoneExists(telefone);
+        return ResponseEntity.ok(exists);
+    }
+
+    @GetMapping("/checkEmailExists/{email}")
+    public ResponseEntity<?> checkEmailExists(@PathVariable String email) {
+        boolean exists = alunoService.checkEmailExists(email);
+        return ResponseEntity.ok(exists);
+    }
+
 }

@@ -50,4 +50,23 @@ public class AlunoService {
         return this.alunoRepository.findAll();
     }
 
+    public Boolean checkMatriculaExists(String matricula) {
+        return this.alunoRepository.existsByMatricula(matricula);
+    }
+
+    public Boolean checkCpfExists(String cpf) {
+        return this.alunoRepository.existsByCpf(cpf);
+    }
+
+    public Boolean checkRgExists(String rg) {
+        return this.alunoRepository.existsByRg(rg);
+    }
+
+    public Boolean checkTelefoneExists(String telefone) {
+        return this.alunoRepository.existsByTelefone(telefone);
+    }
+
+    public Boolean checkEmailExists(String email) {
+        return this.alunoRepository.existsByEmail(email);
+    }
 }
