@@ -42,6 +42,29 @@ public class AlunoService {
     }
 
     @Transactional
+    public Aluno updateAluno(Aluno aluno) {
+        aluno = this.alunoRepository.save(aluno);
+
+        Usuario Usuario = usuarioService.getUsuarioByIdAlunoProfessor(aluno.getId_aluno());
+        Usuario.setCpf(aluno.getCpf());
+        String cpf = aluno.getCpf();
+        String senha = cpf.substring(0, 3) + cpf.substring(cpf.length() - 2);
+        Usuario.setSenha(senha);
+        Usuario.setNome(aluno.getNome());
+
+        usuarioService.updateUsuario(Usuario);
+
+        return aluno;
+    }
+
+    @Transactional
+    public void deleteAluno(Long id) {
+        usuarioService.deleteUsuarioByIdAlunoProfessor(id);
+        this.alunoRepository.deleteById(id);    
+        
+    }
+
+    @Transactional
     public String getNomeAluno(Long id) {
         return alunoRepository.findById(id).get().getNome();
     }

@@ -3,12 +3,15 @@ package com.jeyson.gerenciamentomatricula.Controllers;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jeyson.gerenciamentomatricula.Models.Aluno;
 import com.jeyson.gerenciamentomatricula.Models.Aluno.CreateAluno;
+import com.jeyson.gerenciamentomatricula.Models.Aluno.UpdateAluno;
 import com.jeyson.gerenciamentomatricula.Services.AlunoService;
 
 import jakarta.validation.Valid;
@@ -35,6 +39,19 @@ public class AlunoController {
         Aluno alunoCriado = alunoService.createAluno(aluno);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(alunoCriado.getId_aluno()).toUri();
         return ResponseEntity.created(uri).body(alunoCriado);
+    }
+
+    @PutMapping("/update")
+    @Validated(UpdateAluno.class)
+    public ResponseEntity<Aluno> updateAluno(@Valid @RequestBody Aluno aluno) {
+        Aluno alunoAtualizado = alunoService.updateAluno(aluno);
+        return ResponseEntity.ok().body(alunoAtualizado);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> excluirAluno(@PathVariable Long id) {
+        alunoService.deleteAluno(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/all")

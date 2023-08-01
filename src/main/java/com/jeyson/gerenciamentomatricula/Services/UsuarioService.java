@@ -32,4 +32,14 @@ public class UsuarioService {
         return this.usuarioRepository.findAll();
     }
     
+    public Usuario getUsuarioByIdAlunoProfessor(Long id) {
+        return this.usuarioRepository.findByIdAlunoProfessor(id);
+    }
+
+    @Transactional
+    public Boolean deleteUsuarioByIdAlunoProfessor(Long id) {
+        this.usuarioRepository.deleteByIdAlunoProfessor(id);
+        return true;
+}
+
 }
