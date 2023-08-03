@@ -40,6 +40,9 @@ public class UsuarioService {
     public Boolean deleteUsuarioByIdAlunoProfessor(Long id) {
         this.usuarioRepository.deleteByIdAlunoProfessor(id);
         return true;
-}
+}   
+    public Boolean existsByCpf(String cpf) {
+        return this.usuarioRepository.existsByCpf(cpf);
+    }
 
 }

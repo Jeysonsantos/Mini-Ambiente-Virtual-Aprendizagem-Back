@@ -50,7 +50,7 @@ public class Aluno {
     @Column(name = "rg", nullable = false, length = 8, unique = true)
     @NotNull(groups = { CreateAluno.class })
     @NotEmpty(groups = { CreateAluno.class })
-    @Size(min = 4, max = 8)
+    @Size(min = 4, max = 15)
     private String rg;
 
     @Column(name = "matricula", nullable = false, length = 8, unique = true)
@@ -59,15 +59,13 @@ public class Aluno {
     @Size(min = 8, max = 8)
     private String matricula;
 
-    @Column(name = "telefone", nullable = false, length = 11, unique = true)
+    @Column(name = "telefone", nullable = false, length = 11)
     @NotNull(groups = { CreateAluno.class, UpdateAluno.class })
-    @NotEmpty(groups = { CreateAluno.class, UpdateAluno.class })
-    @Size(min = 8, max = 11)
+    @Size(min = 8, max = 15)
     private String telefone;
 
-    @Column(name = "email", nullable = false, length = 255, unique = true)
+    @Column(name = "email", nullable = false, length = 255)
     @NotNull(groups = { CreateAluno.class, UpdateAluno.class})
-    @NotEmpty(groups = { CreateAluno.class, UpdateAluno.class })
     @Size(min = 3, max = 255)
     private String email;
 

@@ -26,34 +26,41 @@ public class AlunoService {
         aluno.setId_aluno(null);
         aluno = this.alunoRepository.save(aluno);
 
-        Usuario Usuario = new Usuario();
-
-        Usuario.setCpf(aluno.getCpf());
+        Usuario usuario = new Usuario();
+        usuario.setCpf(aluno.getCpf());
         String cpf = aluno.getCpf();
         String senha = cpf.substring(0, 3) + cpf.substring(cpf.length() - 2);
-        Usuario.setSenha(senha);
-        Usuario.setId_aluno_professor(aluno.getId_aluno());
-        Usuario.setTipo_usuario("aluno");
-        Usuario.setNome(aluno.getNome());
 
-        usuarioService.createUsuario(Usuario);
-
+        usuario.setSenha(senha);
+        usuario.setId_aluno_professor(aluno.getId_aluno());
+        usuario.setTipo_usuario("aluno");
+        usuario.setNome(aluno.getNome());
+        usuarioService.createUsuario(usuario);
+        
         return aluno;
     }
 
     @Transactional
     public Aluno updateAluno(Aluno aluno) {
         aluno = this.alunoRepository.save(aluno);
-
-        Usuario Usuario = usuarioService.getUsuarioByIdAlunoProfessor(aluno.getId_aluno());
-        Usuario.setCpf(aluno.getCpf());
         String cpf = aluno.getCpf();
         String senha = cpf.substring(0, 3) + cpf.substring(cpf.length() - 2);
-        Usuario.setSenha(senha);
-        Usuario.setNome(aluno.getNome());
 
-        usuarioService.updateUsuario(Usuario);
-
+        Usuario Usuario = usuarioService.getUsuarioByIdAlunoProfessor(aluno.getId_aluno());
+        if(Usuario != null){
+            Usuario.setCpf(aluno.getCpf());
+            Usuario.setSenha(senha);
+            Usuario.setNome(aluno.getNome());
+            usuarioService.updateUsuario(Usuario);
+        }else{
+            Usuario = new Usuario();
+            Usuario.setCpf(cpf);
+            Usuario.setSenha(senha);
+            Usuario.setId_aluno_professor(aluno.getId_aluno());
+            Usuario.setTipo_usuario("aluno");
+            Usuario.setNome(aluno.getNome());
+            usuarioService.createUsuario(Usuario);
+        }
         return aluno;
     }
 
@@ -70,7 +77,10 @@ public class AlunoService {
     }
 
     public List<Aluno> getAllAlunos() {
-        return this.alunoRepository.findAll();
+        List<Aluno> alunos = this.alunoRepository.findAll();
+        //CreateAllUsuario();
+    
+        return alunos;
     }
 
     public Boolean checkMatriculaExists(String matricula) {
@@ -91,5 +101,27 @@ public class AlunoService {
 
     public Boolean checkEmailExists(String email) {
         return this.alunoRepository.existsByEmail(email);
+    }
+
+    public Boolean CreateAllUsuario() {
+        List<Aluno> alunos = this.alunoRepository.findAll();
+        for (Aluno aluno : alunos) {
+            if(usuarioService.existsByCpf(aluno.getCpf())){
+                continue;
+            }else{
+                Usuario Usuario = new Usuario();
+                Usuario.setCpf(aluno.getCpf());
+                String cpf = aluno.getCpf();
+                String senha = cpf.substring(0, 3) + cpf.substring(cpf.length() - 2);
+                Usuario.setSenha(senha);
+                Usuario.setId_aluno_professor(aluno.getId_aluno());
+                Usuario.setTipo_usuario("aluno");   
+                Usuario.setNome(aluno.getNome());
+                usuarioService.createUsuario(Usuario);
+                System.out.println("Criou usuario para o aluno: " + aluno.getNome());
+            }
+        }
+
+        return true;
     }
 }
