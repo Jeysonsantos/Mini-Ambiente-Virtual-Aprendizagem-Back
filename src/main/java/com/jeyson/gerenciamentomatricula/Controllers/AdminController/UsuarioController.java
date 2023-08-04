@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Controllers;
+package com.jeyson.gerenciamentomatricula.Controllers.AdminController;
 
 import java.net.URI;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jeyson.gerenciamentomatricula.Models.Usuario;
-import com.jeyson.gerenciamentomatricula.Services.UsuarioService;
+import com.jeyson.gerenciamentomatricula.Services.AdminService.UsuarioService;
 
 import jakarta.validation.Valid;
 

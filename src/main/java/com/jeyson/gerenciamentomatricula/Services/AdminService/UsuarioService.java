@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Services;
+package com.jeyson.gerenciamentomatricula.Services.AdminService;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Services;
+package com.jeyson.gerenciamentomatricula.Services.AdminService;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import com.jeyson.gerenciamentomatricula.Repositories.ProfessorRepository;
 
 
 @Service
-public class ProfessorService {
+public class AdminProfessorService {
     
     @Autowired
     private ProfessorRepository professorRepository;

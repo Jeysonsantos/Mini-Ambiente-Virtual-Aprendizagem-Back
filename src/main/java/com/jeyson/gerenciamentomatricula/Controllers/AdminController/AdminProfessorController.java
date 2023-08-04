@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Controllers;
+package com.jeyson.gerenciamentomatricula.Controllers.AdminController;
 
 import java.net.URI;
 
@@ -17,75 +17,75 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.jeyson.gerenciamentomatricula.Models.Aluno;
-import com.jeyson.gerenciamentomatricula.Models.Aluno.CreateAluno;
 import com.jeyson.gerenciamentomatricula.Models.Aluno.UpdateAluno;
-import com.jeyson.gerenciamentomatricula.Services.AlunoService;
+import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminProfessorService;
+import com.jeyson.gerenciamentomatricula.Models.Professor;
 
 import jakarta.validation.Valid;
 
-@RestController
-@RequestMapping("/admin/aluno")
 @Validated
+@RestController
 @CrossOrigin(origins = "http://localhost:4200")
-public class AlunoController {
-    
+@RequestMapping("/admin/professor")
+public class AdminProfessorController {
+
     @Autowired
-    private AlunoService alunoService;
+    private AdminProfessorService professorService;
 
     @PostMapping("/create")
-    @Validated(CreateAluno.class)
-    public ResponseEntity<Aluno> createAluno(@Valid @RequestBody Aluno aluno) {
-        Aluno alunoCriado = alunoService.createAluno(aluno);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(alunoCriado.getId_aluno()).toUri();
-        return ResponseEntity.created(uri).body(alunoCriado);
+    @Validated(Professor.CreateProfessor.class)
+    public ResponseEntity<Professor> createProfessor(@Valid @RequestBody Professor professor) {
+        Professor professorCriado = professorService.createProfessor(professor);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(professorCriado.getId_professor()).toUri();
+        return ResponseEntity.created(uri).body(professorCriado);
     }
 
     @PutMapping("/update")
     @Validated(UpdateAluno.class)
-    public ResponseEntity<Aluno> updateAluno(@Valid @RequestBody Aluno aluno) {
-        Aluno alunoAtualizado = alunoService.updateAluno(aluno);
-        return ResponseEntity.ok().body(alunoAtualizado);
+    public ResponseEntity<Professor> updateAluno(@Valid @RequestBody Professor professor) {
+        Professor professorAtualizado = professorService.updateProfessor(professor);
+        return ResponseEntity.ok().body(professorAtualizado);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> excluirAluno(@PathVariable Long id) {
-        alunoService.deleteAluno(id);
+    public ResponseEntity<?> excluirProfessor(@PathVariable Long id) {
+        professorService.deleteProfessor(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Iterable<Aluno>> listAlunos() {
-        return ResponseEntity.ok().body(alunoService.getAllAlunos());
+    public ResponseEntity<Iterable<Professor>> listProfessores() {
+        return ResponseEntity.ok().body(professorService.getAllAlunos());
     }
-    @GetMapping("/checkMatriculaExists/{matricula}")
-    public ResponseEntity<?> checkMatriculaExists(@PathVariable String matricula) {
-        boolean exists = alunoService.checkMatriculaExists(matricula);
+
+    @GetMapping("/checkCodigoExists/{codigo}")
+    public ResponseEntity<?> checkCodigoExists(@PathVariable String codigo) {
+        boolean exists = professorService.checkCodigoExists(codigo);
         return ResponseEntity.ok(exists);
     }
 
     @GetMapping("/checkCpfExists/{cpf}")
     public ResponseEntity<?> checkCpfExists(@PathVariable String cpf) {
-        boolean exists = alunoService.checkCpfExists(cpf);
+        boolean exists = professorService.checkCpfExists(cpf);
         return ResponseEntity.ok(exists);
     }
 
     @GetMapping("/checkRgExists/{rg}")
     public ResponseEntity<?> checkRgExists(@PathVariable String rg) {
-        boolean exists = alunoService.checkRgExists(rg);
+        boolean exists = professorService.checkRgExists(rg);
         return ResponseEntity.ok(exists);
     }
 
     @GetMapping("/checkTelefoneExists/{telefone}")
     public ResponseEntity<?> checkTelefoneExists(@PathVariable String telefone) {
-        boolean exists = alunoService.checkTelefoneExists(telefone);
+        boolean exists = professorService.checkTelefoneExists(telefone);
         return ResponseEntity.ok(exists);
     }
 
     @GetMapping("/checkEmailExists/{email}")
     public ResponseEntity<?> checkEmailExists(@PathVariable String email) {
-        boolean exists = alunoService.checkEmailExists(email);
+        boolean exists = professorService.checkEmailExists(email);
         return ResponseEntity.ok(exists);
     }
 
-}
+}   

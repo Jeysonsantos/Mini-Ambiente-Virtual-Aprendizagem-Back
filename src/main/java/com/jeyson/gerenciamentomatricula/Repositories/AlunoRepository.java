@@ -12,4 +12,5 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long>{
     Boolean existsByRg(String rg);
     Boolean existsByTelefone(String telefone);
     Boolean existsByEmail(String email);
+
 }

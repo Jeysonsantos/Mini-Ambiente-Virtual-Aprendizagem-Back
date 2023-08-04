@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jeyson.gerenciamentomatricula.Models.AutenticarUsuario;
 import com.jeyson.gerenciamentomatricula.Models.Login;
 import com.jeyson.gerenciamentomatricula.Models.Usuario;
-import com.jeyson.gerenciamentomatricula.Services.UsuarioService;
+import com.jeyson.gerenciamentomatricula.Services.AdminService.UsuarioService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Services;
+package com.jeyson.gerenciamentomatricula.Services.AdminService;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import com.jeyson.gerenciamentomatricula.Repositories.AlunoRepository;
 
 
 @Service
-public class AlunoService {
+public class AdminAlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
@@ -36,7 +36,7 @@ public class AlunoService {
         usuario.setTipo_usuario("aluno");
         usuario.setNome(aluno.getNome());
         usuarioService.createUsuario(usuario);
-        
+
         return aluno;
     }
 
