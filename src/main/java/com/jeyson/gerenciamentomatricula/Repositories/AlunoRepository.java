@@ -7,6 +7,7 @@ import com.jeyson.gerenciamentomatricula.Models.Aluno;
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 
     Aluno findByCpf(String cpf);
+    Aluno findByMatricula(String matricula);
     Boolean existsByMatricula(String matricula);
     Boolean existsByCpf(String cpf);
     Boolean existsByRg(String rg);

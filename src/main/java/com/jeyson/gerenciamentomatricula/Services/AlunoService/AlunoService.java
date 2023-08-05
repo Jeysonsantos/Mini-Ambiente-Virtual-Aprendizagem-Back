@@ -24,5 +24,11 @@ public class AlunoService {
         }
     }
 
+    public Aluno getAlunoById(Long id) {
+        Aluno aluno = alunoRepository.findById(id).orElse(null);
+
+        return aluno;
+    }
+
     
 }

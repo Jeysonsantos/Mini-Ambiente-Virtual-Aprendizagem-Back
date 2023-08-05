@@ -40,12 +40,9 @@ public class AlunoController {
     public ResponseEntity<String> getEmailById(@PathVariable Long id) {
         return ResponseEntity.ok().body(alunoService.getEmailById(id));
     }
-    
 
-
-
-
-
-    
-    
+    @GetMapping("/getAlunoById/{id}")
+    public ResponseEntity<Aluno> getAlunoById(@PathVariable Long id) {
+        return ResponseEntity.ok().body(alunoService.getAlunoById(id));
+    }
 }
