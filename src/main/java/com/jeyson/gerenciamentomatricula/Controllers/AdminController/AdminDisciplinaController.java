@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Controllers;
+package com.jeyson.gerenciamentomatricula.Controllers.AdminController;
 
 import java.net.URI;
 
@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/disciplina")
 @Validated
 @CrossOrigin(origins = "http://localhost:4200")
-public class DisciplinaController {
+public class AdminDisciplinaController {
     @Autowired
     private DisciplinaService disciplinaService;
     

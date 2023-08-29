@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
@@ -35,7 +36,7 @@ public class Disciplina {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_disciplina;
 
-    @JoinColumn(name = "id_professor", nullable = false, updatable = false)
+    @JoinColumn(name = "id_professor")
     @ManyToOne
     private Professor id_professor;
 
@@ -53,9 +54,7 @@ public class Disciplina {
     @NotNull(groups = { CreateDisciplina.class})
     private int carga_horaria;
 
-    @Column(name = "ementa")
-    @NotNull(groups = { CreateDisciplina.class, UpdateDisciplina.class})
-    @NotEmpty(groups = { CreateDisciplina.class, UpdateDisciplina.class})
-    private String ementa;
-    
+    @Lob
+    @Column(name = "ementa_pdf", columnDefinition = "BLOB")
+    private byte[] ementaPdf;
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.jeyson.gerenciamentomatricula.Models.Aluno.UpdateAluno;
+import com.jeyson.gerenciamentomatricula.Models.Professor.UpdateProfessor;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminProfessorService;
 import com.jeyson.gerenciamentomatricula.Models.Professor;
 
@@ -41,8 +42,8 @@ public class AdminProfessorController {
     }
 
     @PutMapping("/update")
-    @Validated(UpdateAluno.class)
-    public ResponseEntity<Professor> updateAluno(@Valid @RequestBody Professor professor) {
+    @Validated(UpdateProfessor.class)
+    public ResponseEntity<Professor> updateProfessor(@Valid @RequestBody Professor professor) {
         Professor professorAtualizado = professorService.updateProfessor(professor);
         return ResponseEntity.ok().body(professorAtualizado);
     }

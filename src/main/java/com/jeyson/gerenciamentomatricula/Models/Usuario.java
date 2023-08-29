@@ -45,7 +45,7 @@ public class Usuario {
     @Size(min = 3, max = 255)
     private String senha;
 
-    @Column(name = "id_aluno/professor", nullable = false, updatable = false)
+    @Column(name = "id_aluno_professor", nullable = false, updatable = false)
     private Long id_aluno_professor;
 
     @Column(name = "nome", nullable = false, length = 255)
