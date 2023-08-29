@@ -77,7 +77,7 @@ public class AdminProfessorService {
 
     public List<Professor> getAllAlunos() {
         List<Professor> professor = this.professorRepository.findAll();
-        //CreateAllUsuario();
+        ///CreateAllUsuario();
     
         return professor;
     }

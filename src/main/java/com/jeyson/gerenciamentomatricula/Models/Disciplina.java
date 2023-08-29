@@ -1,5 +1,7 @@
 package com.jeyson.gerenciamentomatricula.Models;
 
+import java.sql.Blob;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,6 +51,10 @@ public class Disciplina {
     @NotNull(groups = { CreateDisciplina.class})
     @NotEmpty(groups = { CreateDisciplina.class})
     private String codigo;
+
+    @Column(name = "periodo", nullable = false)
+    @NotNull(groups = { CreateDisciplina.class})
+    private String periodo;
 
     @Column(name = "carga_horaria", nullable = false)
     @NotNull(groups = { CreateDisciplina.class})
