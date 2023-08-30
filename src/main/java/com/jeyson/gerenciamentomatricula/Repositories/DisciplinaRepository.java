@@ -10,5 +10,4 @@ import com.jeyson.gerenciamentomatricula.Models.Professor;
 public interface DisciplinaRepository extends JpaRepository<Disciplina, Long>{
     
     boolean existsByCodigo(String codigo);
-    List<Professor>findAlldisciplinasByIdProfessor(Long idProfessor);
 }
