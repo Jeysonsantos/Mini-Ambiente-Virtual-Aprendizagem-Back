@@ -43,9 +43,13 @@ public class DisciplinaAluno {
     @ManyToOne
     private Disciplina id_disciplina;
 
-    @Column(name = "nota", nullable = false, columnDefinition = "float default 0.0")
+    @Column(name = "nota_ab1", nullable = false, columnDefinition = "float default 0.0")
     @NotNull(groups = {CreateDisciplinaAluno.class, UpdateDisciplinaAluno.class})
-    private float nota;
+    private float nota_ab1;
+
+    @Column(name = "nota_ab2", nullable = false, columnDefinition = "float default 0.0")
+    @NotNull(groups = {CreateDisciplinaAluno.class, UpdateDisciplinaAluno.class})
+    private float nota_ab2;
 
 
     

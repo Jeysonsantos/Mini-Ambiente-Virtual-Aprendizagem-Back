@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.jeyson.gerenciamentomatricula.Models.Aluno.UpdateAluno;
 import com.jeyson.gerenciamentomatricula.Models.Professor.UpdateProfessor;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminProfessorService;
 import com.jeyson.gerenciamentomatricula.Models.Professor;

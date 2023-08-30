@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Controllers;
+package com.jeyson.gerenciamentomatricula.Controllers.ProfessorController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

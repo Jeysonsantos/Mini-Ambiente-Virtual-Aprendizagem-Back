@@ -1,4 +1,4 @@
-package com.jeyson.gerenciamentomatricula.Controllers;
+package com.jeyson.gerenciamentomatricula.Controllers.AtividadesController;
 
 import java.net.URI;
 

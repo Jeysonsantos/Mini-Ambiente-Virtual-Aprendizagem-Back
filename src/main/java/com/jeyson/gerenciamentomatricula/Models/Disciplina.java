@@ -1,6 +1,5 @@
 package com.jeyson.gerenciamentomatricula.Models;
 
-import java.sql.Blob;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
