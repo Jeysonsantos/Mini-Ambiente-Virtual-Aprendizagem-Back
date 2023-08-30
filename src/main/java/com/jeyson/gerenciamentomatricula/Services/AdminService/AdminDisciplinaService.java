@@ -42,4 +42,8 @@ public class AdminDisciplinaService {
         return this.disciplinaRepository.existsByCodigo(codigo);
     }
 
+    public List<Disciplina> findAllByProfessorId(Long professorId) {
+        return disciplinaRepository.findAllByProfessorId(professorId);
+    }
+
 }

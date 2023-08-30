@@ -46,7 +46,7 @@ public class Disciplina {
     @NotEmpty(groups = { CreateDisciplina.class})
     private String nome;
 
-    @Column(name = "codigo", nullable = false, length = 7,unique = true)
+    @Column(name = "codigo", nullable = false, length = 20,unique = true)
     @NotNull(groups = { CreateDisciplina.class})
     @NotEmpty(groups = { CreateDisciplina.class})
     private String codigo;

@@ -1,22 +1,16 @@
 package com.jeyson.gerenciamentomatricula.Controllers.ProfessorController;
 
-import java.net.URI;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.jeyson.gerenciamentomatricula.Models.Disciplina;
-import com.jeyson.gerenciamentomatricula.Models.Disciplina.CreateDisciplina;
 import com.jeyson.gerenciamentomatricula.Models.Professor;
 import com.jeyson.gerenciamentomatricula.Models.Professor.UpdateProfessor;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminDisciplinaService;
@@ -43,8 +37,10 @@ public class ProfessorDisciplina {
         return ResponseEntity.ok().body(professorAtualizado);
     }
     
-    @GetMapping("/all")
-    public ResponseEntity<Iterable<Disciplina>> listDisciplinas() {
-        return ResponseEntity.ok().body(AdmindisciplinaService.getAllDisciplinas());
-    }
+    @GetMapping("/allByProfessor/{id}")
+    public ResponseEntity<Iterable<Disciplina>> listDisciplinasByProfessorId(@PathVariable Long id) {
+        Iterable<Disciplina> disciplinas = AdmindisciplinaService.findAllByProfessorId(id);
+        return ResponseEntity.ok().body(disciplinas);
+}
+
 }
