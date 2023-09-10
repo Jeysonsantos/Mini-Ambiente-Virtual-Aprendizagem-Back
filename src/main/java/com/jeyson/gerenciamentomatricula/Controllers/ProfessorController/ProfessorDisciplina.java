@@ -41,6 +41,12 @@ public class ProfessorDisciplina {
     public ResponseEntity<Iterable<Disciplina>> listDisciplinasByProfessorId(@PathVariable Long id) {
         Iterable<Disciplina> disciplinas = AdmindisciplinaService.findAllByProfessorId(id);
         return ResponseEntity.ok().body(disciplinas);
-}
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Disciplina> getDisciplinaById(@PathVariable Long id) {
+        Disciplina disciplina = AdmindisciplinaService.findDisciplinaById(id);
+        return ResponseEntity.ok().body(disciplina);
+    }
 
 }

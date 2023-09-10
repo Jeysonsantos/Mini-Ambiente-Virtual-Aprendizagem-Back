@@ -44,10 +44,10 @@ public class Atividade {
     @Column(name = "id_atividade", unique = true, nullable = false, updatable = false)
     private Long id_atividade;
     
-    @Column(name = "atividade", nullable = false)
+    @Column(name = "descricao_atividade", nullable = false)
     @NotNull(groups = {CreateAtividade.class, UpdateAtividade.class})
     @NotEmpty(groups = {CreateAtividade.class, UpdateAtividade.class})
-    private String atividade;
+    private String descricao_atividade;
 
     @Column(name = "tipo", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -55,7 +55,7 @@ public class Atividade {
     private TipoAtividade tipo;
 
     @Column(name = "data_postagem", nullable = false, updatable = false)
-    private LocalDate data;
+    private LocalDate data_postagem;
 
     @Column(name = "data_entrega")
     private LocalDate data_entrega;
@@ -64,14 +64,9 @@ public class Atividade {
     @JoinColumn(name = "id_disciplina", nullable = false, updatable = false)
     private Disciplina id_disciplina;
 
-    @JoinColumn(name = "id_plano_aula", nullable = false, updatable = false)
-    @ManyToOne()
-    private PlanoAula id_plano_aula;
-
-
     @PrePersist
     public void prePersist() {
-        this.data = LocalDate.now();
+        this.data_postagem = LocalDate.now();
     }
 
     

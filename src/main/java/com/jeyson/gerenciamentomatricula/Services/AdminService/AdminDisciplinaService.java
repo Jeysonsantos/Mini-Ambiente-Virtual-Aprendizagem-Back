@@ -46,4 +46,8 @@ public class AdminDisciplinaService {
         return disciplinaRepository.findAllByProfessorId(professorId);
     }
 
+    public Disciplina findDisciplinaById(Long id) {
+        return disciplinaRepository.findById(id).orElse(null);
+    }
+
 }
