@@ -32,7 +32,7 @@ public class Anexo {
     @Column(name = "descricao", nullable = false, length = 255)
     private String descricao;
 
-    @Column(name = "url", nullable = false, length = 255)
+    @Column(name = "url", length = 255)
     private String url;
 
     private byte[] arquivo;

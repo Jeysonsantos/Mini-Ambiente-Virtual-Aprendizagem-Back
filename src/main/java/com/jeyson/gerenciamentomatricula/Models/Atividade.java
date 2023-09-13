@@ -56,6 +56,9 @@ public class Atividade {
     @Column(name = "id_disciplina")
     private Long id_disciplina;
 
+    @Column(name = "id_postagem")
+    private Long id_postagem;
+
     @PrePersist
     public void prePersist() {
         this.data_postagem = LocalDate.now();

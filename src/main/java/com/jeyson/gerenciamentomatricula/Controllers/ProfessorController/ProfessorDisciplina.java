@@ -1,5 +1,6 @@
 package com.jeyson.gerenciamentomatricula.Controllers.ProfessorController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jeyson.gerenciamentomatricula.Models.Anexo;
+import com.jeyson.gerenciamentomatricula.Models.Atividade;
 import com.jeyson.gerenciamentomatricula.Models.Disciplina;
 import com.jeyson.gerenciamentomatricula.Models.Postagem;
 import com.jeyson.gerenciamentomatricula.Models.Professor;
@@ -59,6 +61,31 @@ public class ProfessorDisciplina {
         
         Postagem postagemCriada = professorService.createPostagem(postagem);
         return ResponseEntity.ok().body(postagemCriada);
+    }
+
+    @PostMapping("/postagens/atividade/create")
+    public ResponseEntity<Atividade> createAtividade(@RequestBody Atividade atividade) {
+        Atividade atividadeCriada = professorService.createAtividade(atividade);
+        return ResponseEntity.ok().body(atividadeCriada);
+    }
+
+    @PostMapping("/postagens/{id_postagem}/{id_atividade}/upload")
+    public ResponseEntity<List<Anexo>> uploadAnexo(@PathVariable Long id_postagem, @PathVariable Long id_atividade,
+            @RequestBody List<byte[]> lista_arquivos) {
+        Anexo anexo = new Anexo();
+        List<Anexo> anexos = new ArrayList<Anexo>();
+        for (byte[] arquivo : lista_arquivos) {
+            anexo.setArquivo(arquivo);
+            anexo.setDescricao("teste");
+            anexo.setId_atividade(id_atividade);
+            anexo.setId_postagem(id_postagem);
+            Anexo anexoCriado = professorService.createAnexo(anexo);
+
+            anexos.add(anexoCriado);
+        }
+
+        
+        return ResponseEntity.ok().body(anexos);
     }
     
 
