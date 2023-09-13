@@ -3,8 +3,6 @@ package com.jeyson.gerenciamentomatricula.Models;
 
 import java.time.LocalDate;
 
-import com.jeyson.gerenciamentomatricula.Models.Enum.TipoAtividade;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -49,20 +47,14 @@ public class Atividade {
     @NotEmpty(groups = {CreateAtividade.class, UpdateAtividade.class})
     private String descricao_atividade;
 
-    @Column(name = "tipo", nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(groups = { CreateAtividade.class, UpdateAtividade.class })
-    private TipoAtividade tipo;
-
     @Column(name = "data_postagem", nullable = false, updatable = false)
     private LocalDate data_postagem;
 
     @Column(name = "data_entrega")
     private LocalDate data_entrega;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_disciplina", nullable = false, updatable = false)
-    private Disciplina id_disciplina;
+    @Column(name = "id_disciplina")
+    private Long id_disciplina;
 
     @PrePersist
     public void prePersist() {

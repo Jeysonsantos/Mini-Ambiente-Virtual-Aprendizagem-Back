@@ -35,7 +35,10 @@ public class Anexo {
     @Column(name = "url", nullable = false, length = 255)
     private String url;
 
+    private byte[] arquivo;
 
+    private Long id_postagem;
 
-    
+    private Long id_atividade;
+
 }

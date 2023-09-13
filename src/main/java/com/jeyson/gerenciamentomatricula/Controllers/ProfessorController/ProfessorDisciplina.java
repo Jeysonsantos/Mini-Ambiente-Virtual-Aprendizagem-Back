@@ -1,20 +1,27 @@
 package com.jeyson.gerenciamentomatricula.Controllers.ProfessorController;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.jeyson.gerenciamentomatricula.Models.Anexo;
 import com.jeyson.gerenciamentomatricula.Models.Disciplina;
+import com.jeyson.gerenciamentomatricula.Models.Postagem;
 import com.jeyson.gerenciamentomatricula.Models.Professor;
 import com.jeyson.gerenciamentomatricula.Models.Professor.UpdateProfessor;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminDisciplinaService;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminProfessorService;
+import com.jeyson.gerenciamentomatricula.Services.ProfessorServicee.ProfessorService;
 
 import jakarta.validation.Valid;
 
@@ -25,15 +32,19 @@ import jakarta.validation.Valid;
 public class ProfessorDisciplina {
 
     @Autowired
-    private AdminProfessorService professorService;
+    private AdminProfessorService AdminprofessorService;
 
     @Autowired
     private AdminDisciplinaService AdmindisciplinaService;
 
+    @Autowired
+    private ProfessorService professorService;
+
+
     @PutMapping("/update")
     @Validated(UpdateProfessor.class)
     public ResponseEntity<Professor> updateProfessor(@Valid @RequestBody Professor professor) {
-        Professor professorAtualizado = professorService.updateProfessor(professor);
+        Professor professorAtualizado = AdminprofessorService.updateProfessor(professor);
         return ResponseEntity.ok().body(professorAtualizado);
     }
     
@@ -42,6 +53,15 @@ public class ProfessorDisciplina {
         Iterable<Disciplina> disciplinas = AdmindisciplinaService.findAllByProfessorId(id);
         return ResponseEntity.ok().body(disciplinas);
     }
+    
+    @PostMapping("/{id}/createPostagem")
+    public ResponseEntity<Postagem> createPostagem(@PathVariable Long id, @RequestBody Postagem postagem) {
+        
+        Postagem postagemCriada = professorService.createPostagem(postagem);
+        return ResponseEntity.ok().body(postagemCriada);
+    }
+    
+
 
     @GetMapping("{id}")
     public ResponseEntity<Disciplina> getDisciplinaById(@PathVariable Long id) {
