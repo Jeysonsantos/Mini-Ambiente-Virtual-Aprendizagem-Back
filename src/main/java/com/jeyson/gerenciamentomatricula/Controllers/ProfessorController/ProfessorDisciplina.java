@@ -1,9 +1,11 @@
 package com.jeyson.gerenciamentomatricula.Controllers.ProfessorController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jeyson.gerenciamentomatricula.Models.Anexo;
 import com.jeyson.gerenciamentomatricula.Models.Atividade;
@@ -42,23 +46,22 @@ public class ProfessorDisciplina {
     @Autowired
     private ProfessorService professorService;
 
-
     @PutMapping("/update")
     @Validated(UpdateProfessor.class)
     public ResponseEntity<Professor> updateProfessor(@Valid @RequestBody Professor professor) {
         Professor professorAtualizado = AdminprofessorService.updateProfessor(professor);
         return ResponseEntity.ok().body(professorAtualizado);
     }
-    
+
     @GetMapping("/allByProfessor/{id}")
     public ResponseEntity<Iterable<Disciplina>> listDisciplinasByProfessorId(@PathVariable Long id) {
         Iterable<Disciplina> disciplinas = AdmindisciplinaService.findAllByProfessorId(id);
         return ResponseEntity.ok().body(disciplinas);
     }
-    
+
     @PostMapping("/{id}/createPostagem")
     public ResponseEntity<Postagem> createPostagem(@PathVariable Long id, @RequestBody Postagem postagem) {
-        
+
         Postagem postagemCriada = professorService.createPostagem(postagem);
         return ResponseEntity.ok().body(postagemCriada);
     }
@@ -70,30 +73,47 @@ public class ProfessorDisciplina {
     }
 
     @PostMapping("/postagens/{id_postagem}/{id_atividade}/upload")
-    public ResponseEntity<List<Anexo>> uploadAnexo(@PathVariable Long id_postagem, @PathVariable Long id_atividade,
-            @RequestBody List<byte[]> lista_arquivos) {
+    public ResponseEntity<Anexo> uploadAnexo(
+            @PathVariable Long id_postagem,
+            @PathVariable Long id_atividade,
+            @RequestParam("file") MultipartFile file) {
+        // Aqui você pode lidar com o arquivo enviado e outros parâmetros
+        // Salvar o arquivo, processar dados, etc.
+
         Anexo anexo = new Anexo();
-        List<Anexo> anexos = new ArrayList<Anexo>();
-        for (byte[] arquivo : lista_arquivos) {
-            anexo.setArquivo(arquivo);
-            anexo.setDescricao("teste");
-            anexo.setId_atividade(id_atividade);
-            anexo.setId_postagem(id_postagem);
-            Anexo anexoCriado = professorService.createAnexo(anexo);
+        anexo.setNome(file.getOriginalFilename());
+        anexo.setTipo(file.getContentType());
+        anexo.setId_atividade(id_atividade);
+        anexo.setId_postagem(id_postagem);
 
-            anexos.add(anexoCriado);
+        try {
+            byte[] bytesDoArquivo = file.getBytes();
+            anexo.setDados(bytesDoArquivo);
+            professorService.createAnexo(anexo);
+            return ResponseEntity.ok(anexo);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null); // Ou envie uma mensagem de erro apropriada
         }
-
-        
-        return ResponseEntity.ok().body(anexos);
     }
-    
-
 
     @GetMapping("{id}")
     public ResponseEntity<Disciplina> getDisciplinaById(@PathVariable Long id) {
         Disciplina disciplina = AdmindisciplinaService.findDisciplinaById(id);
         return ResponseEntity.ok().body(disciplina);
+    }
+
+    @GetMapping("/{disciplinaId}/postagens")
+    public ResponseEntity<Iterable<Postagem>> listPostagensByDisciplinaId(@PathVariable Long disciplinaId) {
+        Iterable<Postagem> postagens = professorService.findAllPostagensByDisciplinaId(disciplinaId);
+        return ResponseEntity.ok().body(postagens);
+    }
+
+    @GetMapping("/postagens/{id_postagem}/anexos")
+    public ResponseEntity<List<Anexo>> listAnexosByPostagemId(@PathVariable Long id_postagem) {
+        List<Anexo> anexos = new ArrayList<Anexo>();
+        anexos = professorService.findAllAnexosByPostagemId(id_postagem);
+        return ResponseEntity.ok().body(anexos);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.jeyson.gerenciamentomatricula.Services.ProfessorServicee;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +56,20 @@ public class ProfessorService {
         anexo = this.anexoRepository.save(anexo);
 
         return anexo;
+    }
+
+    @Transactional
+    public List<Postagem> findAllPostagensByDisciplinaId(Long id){
+        List<Postagem> postagens = this.postagemRepository.findAllByDisciplinaId(id);
+
+        return postagens;
+    }
+
+    @Transactional
+    public List<Anexo> findAllAnexosByPostagemId(Long id){
+        List<Anexo> anexos = this.anexoRepository.findAllByPostagemId(id);
+
+        return anexos;
     }
     
 }
