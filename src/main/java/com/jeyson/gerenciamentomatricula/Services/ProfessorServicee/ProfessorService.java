@@ -71,5 +71,12 @@ public class ProfessorService {
 
         return anexos;
     }
+
+    @Transactional
+    public List<Anexo> findAllAnexosByDisciplinaId(Long id){
+        List<Anexo> anexos = this.anexoRepository.findAllByDisciplinaId(id);
+
+        return anexos;
+    }
     
 }

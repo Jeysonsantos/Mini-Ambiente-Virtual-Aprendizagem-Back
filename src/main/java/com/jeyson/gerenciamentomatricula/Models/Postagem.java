@@ -1,6 +1,7 @@
 package com.jeyson.gerenciamentomatricula.Models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.jeyson.gerenciamentomatricula.Models.Enum.TipoPostagem;
@@ -58,7 +59,7 @@ public class Postagem {
     private String conteudo;
 
     @Column(name = "data", nullable = false, updatable = false)
-    private LocalDate data;
+    private LocalDateTime data;
 
     @Column(name = "tipo", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -69,9 +70,5 @@ public class Postagem {
     @JoinColumn(name = "disciplina", nullable = false, updatable = false)
     private Disciplina disciplina;
 
-    @PrePersist
-    public void prePersist() {
-        this.data = LocalDate.now();
-    }
 
 }

@@ -1,11 +1,20 @@
 package com.jeyson.gerenciamentomatricula.Controllers.ProfessorController;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,6 +34,7 @@ import com.jeyson.gerenciamentomatricula.Models.Disciplina;
 import com.jeyson.gerenciamentomatricula.Models.Postagem;
 import com.jeyson.gerenciamentomatricula.Models.Professor;
 import com.jeyson.gerenciamentomatricula.Models.Professor.UpdateProfessor;
+import com.jeyson.gerenciamentomatricula.Services.AnexoService;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminDisciplinaService;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminProfessorService;
 import com.jeyson.gerenciamentomatricula.Services.ProfessorServicee.ProfessorService;
@@ -45,6 +55,9 @@ public class ProfessorDisciplina {
 
     @Autowired
     private ProfessorService professorService;
+
+    @Autowired
+    private AnexoService AnexoService;
 
     @PutMapping("/update")
     @Validated(UpdateProfessor.class)
@@ -72,10 +85,11 @@ public class ProfessorDisciplina {
         return ResponseEntity.ok().body(atividadeCriada);
     }
 
-    @PostMapping("/postagens/{id_postagem}/{id_atividade}/upload")
+    @PostMapping("{id_disciplina}/postagens/{id_postagem}/{id_atividade}/upload")
     public ResponseEntity<Anexo> uploadAnexo(
             @PathVariable Long id_postagem,
             @PathVariable Long id_atividade,
+            @PathVariable Long id_disciplina,
             @RequestParam("file") MultipartFile file) {
         // Aqui você pode lidar com o arquivo enviado e outros parâmetros
         // Salvar o arquivo, processar dados, etc.
@@ -85,6 +99,7 @@ public class ProfessorDisciplina {
         anexo.setTipo(file.getContentType());
         anexo.setId_atividade(id_atividade);
         anexo.setId_postagem(id_postagem);
+        anexo.setId_disciplina(id_disciplina);
 
         try {
             byte[] bytesDoArquivo = file.getBytes();
@@ -115,5 +130,14 @@ public class ProfessorDisciplina {
         anexos = professorService.findAllAnexosByPostagemId(id_postagem);
         return ResponseEntity.ok().body(anexos);
     }
+
+    @GetMapping("/{id_disciplina}/anexos")
+    public ResponseEntity<List<Anexo>> listAnexosByDisciplinaId(@PathVariable Long id_disciplina) {
+        List<Anexo> anexos = new ArrayList<Anexo>();
+        anexos = professorService.findAllAnexosByDisciplinaId(id_disciplina);
+        
+        return ResponseEntity.ok().body(anexos);
+    }
+
 
 }

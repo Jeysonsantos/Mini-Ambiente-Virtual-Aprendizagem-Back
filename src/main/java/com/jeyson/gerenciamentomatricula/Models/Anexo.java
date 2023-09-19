@@ -49,4 +49,6 @@ public class Anexo {
 
     private Long id_atividade;
 
+    private Long id_disciplina;
+
 }
