@@ -50,4 +50,8 @@ public class AdminDisciplinaService {
         return disciplinaRepository.findById(id).orElse(null);
     }
 
+    public Disciplina getDisciplinaById(Long id) {
+        return disciplinaRepository.findById(id).orElse(null);
+    }
+
 }

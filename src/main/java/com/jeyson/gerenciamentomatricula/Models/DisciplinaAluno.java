@@ -33,15 +33,15 @@ public class DisciplinaAluno {
     @Column(name = "id_disciplina_aluno", unique = true, nullable = false, updatable = false)
     private Long id_disciplina_aluno;
 
-    @JoinColumn(name = "id_aluno", nullable = false, updatable = false)
+    @JoinColumn(name = "aluno", nullable = false, updatable = false,unique = true)
     @NotNull
     @ManyToOne
-    private Aluno id_aluno;
+    private Aluno aluno;
 
-    @JoinColumn(name = "id_disciplina", nullable = false, updatable = false)
+    @JoinColumn(name = "disciplina", nullable = false, updatable = false)
     @NotNull
     @ManyToOne
-    private Disciplina id_disciplina;
+    private Disciplina disciplina;
 
     @Column(name = "nota_ab1", nullable = false, columnDefinition = "float default 0.0")
     @NotNull(groups = {CreateDisciplinaAluno.class, UpdateDisciplinaAluno.class})
