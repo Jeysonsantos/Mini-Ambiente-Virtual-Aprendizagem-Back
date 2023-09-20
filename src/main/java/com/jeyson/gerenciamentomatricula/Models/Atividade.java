@@ -47,10 +47,10 @@ public class Atividade {
     @NotEmpty(groups = {CreateAtividade.class, UpdateAtividade.class})
     private String descricao_atividade;
 
-    @Column(name = "data_postagem", nullable = false, updatable = false)
+    @Column(name = "data_postagem", nullable = false, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private LocalDate data_postagem;
 
-    @Column(name = "data_entrega")
+    @Column(name = "data_entrega", columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private LocalDate data_entrega;
 
     @Column(name = "id_disciplina")
@@ -58,11 +58,4 @@ public class Atividade {
 
     @Column(name = "id_postagem")
     private Long id_postagem;
-
-    @PrePersist
-    public void prePersist() {
-        this.data_postagem = LocalDate.now();
-    }
-
-    
 }

@@ -58,7 +58,7 @@ public class Postagem {
     @NotEmpty(groups = {CreatePostagem.class, UpdatePostagem.class})
     private String conteudo;
 
-    @Column(name = "data", nullable = false, updatable = false)
+    @Column(name = "data", nullable = false, updatable = false,columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private LocalDateTime data;
 
     @Column(name = "tipo", nullable = false)
