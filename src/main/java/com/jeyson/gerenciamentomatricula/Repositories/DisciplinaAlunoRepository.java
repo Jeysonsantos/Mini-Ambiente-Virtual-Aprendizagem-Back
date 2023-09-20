@@ -15,4 +15,6 @@ public interface DisciplinaAlunoRepository extends JpaRepository<DisciplinaAluno
     @Query("SELECT a FROM DisciplinaAluno a WHERE a.disciplina.id_disciplina = :id_disciplina AND a.aluno.id_aluno = :id_aluno")
     List<DisciplinaAluno> findAllByDisciplinaIdAlunoId(Long id_disciplina, Long id_aluno);
     
+    @Query("SELECT a FROM DisciplinaAluno a WHERE a.aluno.id_aluno = :id_aluno")
+    List<DisciplinaAluno> findAllByAlunoId(Long id_aluno);
 }

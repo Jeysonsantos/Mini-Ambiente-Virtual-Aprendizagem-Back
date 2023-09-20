@@ -33,7 +33,7 @@ public class DisciplinaAluno {
     @Column(name = "id_disciplina_aluno", unique = true, nullable = false, updatable = false)
     private Long id_disciplina_aluno;
 
-    @JoinColumn(name = "aluno", nullable = false, updatable = false,unique = true)
+    @JoinColumn(name = "aluno", nullable = false, updatable = false)
     @NotNull
     @ManyToOne
     private Aluno aluno;

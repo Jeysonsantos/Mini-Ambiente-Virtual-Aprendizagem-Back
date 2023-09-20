@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jeyson.gerenciamentomatricula.Models.Aluno;
+import com.jeyson.gerenciamentomatricula.Models.Disciplina;
 import com.jeyson.gerenciamentomatricula.Models.DisciplinaAluno;
 import com.jeyson.gerenciamentomatricula.Repositories.DisciplinaAlunoRepository;
 
@@ -32,6 +33,11 @@ public class DisciplinaAlunoService {
     @Transactional
     public List<DisciplinaAluno> findAllByDisciplinaIdAlunoId(Long id_disciplina, Long id_aluno) {
         return this.disciplinaAlunoRepository.findAllByDisciplinaIdAlunoId(id_disciplina, id_aluno);
+    }
+
+    @Transactional
+    public List<DisciplinaAluno> findAllByAlunoId(Long id_aluno) {
+        return this.disciplinaAlunoRepository.findAllByAlunoId(id_aluno);
     }
 
 

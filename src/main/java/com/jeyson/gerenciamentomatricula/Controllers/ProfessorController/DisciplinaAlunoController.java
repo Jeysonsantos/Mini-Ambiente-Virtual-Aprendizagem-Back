@@ -73,6 +73,12 @@ public class DisciplinaAlunoController {
         }
         return ResponseEntity.ok(false);
     }
+
+    @GetMapping("/aluno/{id_aluno}")
+    public ResponseEntity<List<DisciplinaAluno>> getAllDisciplinaAlunoByAlunoIdBy(@PathVariable Long id_aluno) {
+        List<DisciplinaAluno> disciplinaAlunos = disciplinaAlunoService.findAllByAlunoId(id_aluno);
+        return ResponseEntity.ok(disciplinaAlunos);
+    }
     
     
 }
