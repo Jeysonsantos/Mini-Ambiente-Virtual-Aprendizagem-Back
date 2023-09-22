@@ -2,11 +2,9 @@ package com.jeyson.gerenciamentomatricula.Models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.jeyson.gerenciamentomatricula.Models.Enum.TipoPostagem;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,9 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -58,8 +53,10 @@ public class Postagem {
     @NotEmpty(groups = {CreatePostagem.class, UpdatePostagem.class})
     private String conteudo;
 
-    @Column(name = "data", nullable = false, updatable = false,columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "data", nullable = false, updatable = false)
     private LocalDateTime data;
+
+    private LocalDateTime data_entrega;
 
     @Column(name = "tipo", nullable = false)
     @Enumerated(EnumType.STRING)

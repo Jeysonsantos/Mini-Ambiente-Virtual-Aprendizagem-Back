@@ -22,9 +22,6 @@ import com.jeyson.gerenciamentomatricula.Models.DisciplinaAluno;
 import com.jeyson.gerenciamentomatricula.Services.DisciplinaAlunoService;
 import com.jeyson.gerenciamentomatricula.Services.AdminService.AdminDisciplinaService;
 
-import jakarta.validation.Valid;
-
-
 
 @RestController
 @Validated

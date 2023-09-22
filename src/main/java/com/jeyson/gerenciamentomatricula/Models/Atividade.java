@@ -5,14 +5,9 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -47,10 +42,10 @@ public class Atividade {
     @NotEmpty(groups = {CreateAtividade.class, UpdateAtividade.class})
     private String descricao_atividade;
 
-    @Column(name = "data_postagem", nullable = false, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "data_postagem", nullable = false, updatable = false)
     private LocalDate data_postagem;
 
-    @Column(name = "data_entrega", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @Column(name = "data_entrega")
     private LocalDate data_entrega;
 
     @Column(name = "id_disciplina")

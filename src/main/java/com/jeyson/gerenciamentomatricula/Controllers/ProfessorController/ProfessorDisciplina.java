@@ -5,10 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -55,9 +57,6 @@ public class ProfessorDisciplina {
 
     @Autowired
     private ProfessorService professorService;
-
-    @Autowired
-    private AnexoService AnexoService;
 
     @PutMapping("/update")
     @Validated(UpdateProfessor.class)
@@ -139,5 +138,9 @@ public class ProfessorDisciplina {
         return ResponseEntity.ok().body(anexos);
     }
 
-
+    @GetMapping("postagens/{id_postagem}/atividade")
+    public ResponseEntity<Atividade> getAtividadeByPostagemId(@PathVariable Long id_postagem) {
+        Atividade atividade = professorService.findAtividadeByPostagemId(id_postagem);
+        return ResponseEntity.ok().body(atividade);
+    }
 }

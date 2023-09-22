@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.jeyson.gerenciamentomatricula.Models.Aluno;
-import com.jeyson.gerenciamentomatricula.Models.Disciplina;
 import com.jeyson.gerenciamentomatricula.Models.DisciplinaAluno;
 import com.jeyson.gerenciamentomatricula.Repositories.DisciplinaAlunoRepository;
 
