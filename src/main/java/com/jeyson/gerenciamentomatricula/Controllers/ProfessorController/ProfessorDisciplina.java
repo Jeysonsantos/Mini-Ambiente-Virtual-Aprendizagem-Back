@@ -143,4 +143,10 @@ public class ProfessorDisciplina {
         Atividade atividade = professorService.findAtividadeByPostagemId(id_postagem);
         return ResponseEntity.ok().body(atividade);
     }
+
+    @GetMapping("postagens/atividade/{id_atividade}")
+    public ResponseEntity<Atividade> getAtividadeById(@PathVariable Long id_atividade) {
+        Atividade atividade = professorService.findAtividadeById(id_atividade);
+        return ResponseEntity.ok().body(atividade);
+    }
 }

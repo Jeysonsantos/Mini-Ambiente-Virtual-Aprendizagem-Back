@@ -3,6 +3,7 @@ package com.jeyson.gerenciamentomatricula.Services.ProfessorServicee;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,9 +84,13 @@ public class ProfessorService {
 
     @Transactional
     public Atividade findAtividadeByPostagemId(Long id_postagem){
-        System.out.println(id_postagem);
         Atividade atividade = this.atividadeRepository.findByPostagemId(id_postagem);
-        System.out.println(atividade);
+        return atividade;
+    }
+
+    @Transactional
+    public Atividade findAtividadeById(Long id_atividade){
+        Atividade atividade = this.atividadeRepository.findById(id_atividade).get();
         return atividade;
     }
 

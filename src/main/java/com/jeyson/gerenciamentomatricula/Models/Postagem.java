@@ -1,6 +1,5 @@
 package com.jeyson.gerenciamentomatricula.Models;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.jeyson.gerenciamentomatricula.Models.Enum.TipoPostagem;
