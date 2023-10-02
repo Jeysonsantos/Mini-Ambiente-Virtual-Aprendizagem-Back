@@ -47,6 +47,11 @@ public class Postagem {
     @NotEmpty(groups = {CreatePostagem.class, UpdatePostagem.class})
     private String autor;
 
+    @Column(name = "titulo", nullable = false)
+    @NotNull(groups = {CreatePostagem.class, UpdatePostagem.class})
+    @NotEmpty(groups = {CreatePostagem.class, UpdatePostagem.class})
+    private String titulo;
+
     @Column(name = "conteudo", nullable = false)
     @NotNull(groups = {CreatePostagem.class, UpdatePostagem.class})
     @NotEmpty(groups = {CreatePostagem.class, UpdatePostagem.class})

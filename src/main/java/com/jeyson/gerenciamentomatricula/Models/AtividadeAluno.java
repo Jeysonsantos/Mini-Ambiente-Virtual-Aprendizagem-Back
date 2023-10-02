@@ -30,11 +30,11 @@ public class AtividadeAluno {
     @Column(name = "id_atividade_aluno", unique = true, nullable = false, updatable = false)
     private Long id_atividade_aluno;
     
-    @JoinColumn(name = "id_aluno", nullable = false, updatable = false)
+    @JoinColumn(name = "aluno", nullable = false, updatable = false)
     @ManyToOne
     private Aluno id_aluno;
 
-    @JoinColumn(name = "id_atividade", nullable = false, updatable = false)
+    @JoinColumn(name = "atividade", nullable = false, updatable = false)
     @ManyToOne
     private Atividade id_atividade;
 

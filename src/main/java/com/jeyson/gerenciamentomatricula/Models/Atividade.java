@@ -37,6 +37,11 @@ public class Atividade {
     @Column(name = "id_atividade", unique = true, nullable = false, updatable = false)
     private Long id_atividade;
     
+    @Column(name = "titulo_atividade", nullable = false)
+    @NotNull(groups = {CreateAtividade.class, UpdateAtividade.class})
+    @NotEmpty(groups = {CreateAtividade.class, UpdateAtividade.class})
+    private String titulo_atividade;
+
     @Column(name = "descricao_atividade", nullable = false)
     @NotNull(groups = {CreateAtividade.class, UpdateAtividade.class})
     @NotEmpty(groups = {CreateAtividade.class, UpdateAtividade.class})
